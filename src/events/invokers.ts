@@ -1,0 +1,3 @@
+export const CLIENT_CONNECT = 'CLIENT_CONNECT';
+export const CLIENT_MOVED = 'CLIENT_MOVED';
+export const CLIENT_IN_CHANNEL = 'CLIENT_IN_CHANNEL';
