@@ -27,10 +27,11 @@ export class EventsHandler {
           exec: EventsList[event],
           channels: getConf.config
             .map((e: any) => e.channel)
-            .reduce((acc, val) => acc.concat(val), []),
+            .reduce((acc, val) => acc.concat(val === undefined ? undefined : +val), []),
         });
       }
     }
+    console.log(this.events)
     this.subscriber();
   }
 
