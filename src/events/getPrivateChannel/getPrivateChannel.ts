@@ -15,12 +15,10 @@ const getPrivateChannel = async (
   const config = conf[0];
 
   const usersChannel = await PrivateChannelsModel.findOne({owner: +client.databaseId});
-  
-
   if(usersChannel) {
     try {
       await ts.channelInfo(usersChannel.cid + '');
-      return await ts.clientMove(client.cid, usersChannel.cid + '');
+      return await ts.clientMove(client.clid, usersChannel.cid + '');
     } catch(e) {
       await PrivateChannelsModel.deleteOne({_id: usersChannel._id})
     } 
@@ -89,7 +87,7 @@ const getPrivateChannel = async (
     await new PrivateChannelsModel({cid: channelCid, owner: +client.databaseId, status: PRIVATE_CHANNEL_TAKEN, validTo: validity.getTime()}).save();
   }
 
-  return await ts.clientMove(client.cid, channelCid + '');
+  return await ts.clientMove(client.clid, channelCid + '');
 
 };
 
