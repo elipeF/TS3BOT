@@ -31,7 +31,6 @@ export class EventsHandler {
         });
       }
     }
-    console.log(this.events)
     this.subscriber();
   }
 
@@ -77,7 +76,7 @@ export class EventsHandler {
             ...rest,
             channels: config
               .map((e: any) => e.channel)
-              .reduce((acc, val) => acc.concat(val), []),
+              .reduce((acc, val) => acc.concat(val === undefined ? undefined : +val), []),
           };
         } else {
           return el;
