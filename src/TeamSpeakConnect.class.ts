@@ -37,8 +37,8 @@ export default class TeamSpeakConnect {
     });
 
     this.teamspeak.on('error', (e) => {
-      console.log(e);
-      process.exit();
+      console.log(e.message, e.name, e.stack);
+      //process.exit();
     });
   }
 }
