@@ -10,7 +10,7 @@ const getAdminPoke = async (
   conf,
   client: TeamSpeakClient,
 ) => {
-  const configs = conf.filter(el => el.channel.includes(+client.cid));
+  const configs = conf.filter(el => el.channel.includes(client.cid));
   for(const config of configs) {
      const channelMembers = await ts.clientList({cid: client.cid});
      const adminsInChannel = channelMembers.filter(el => arrIntersec<Number>(el.servergroups.map(el => +el), config.groups).length > 0);
