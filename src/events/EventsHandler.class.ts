@@ -48,19 +48,20 @@ export class EventsHandler {
   }
 
   private handle({ client }: { client: TeamSpeakClient }, type) {
-    const events = this.events.filter(
-      (el) => el.enabled &&
-        (el.channels[0] === undefined ? true : el.channels.includes(+client.cid)) &&
-        el.exec.invokers.includes(type)
-    );
-    
-    for(const event of events) {
-      const config = this.config.get(event.name);
-      if (config) {
-        event.exec.fnc(this.ts, config.config, client);
+    if(client.type === 0) {
+      const events = this.events.filter(
+        (el) => el.enabled &&
+          (el.channels[0] === undefined ? true : el.channels.includes(+client.cid)) &&
+          el.exec.invokers.includes(type)
+      );
+      
+      for(const event of events) {
+        const config = this.config.get(event.name);
+        if (config) {
+          event.exec.fnc(this.ts, config.config, client);
+        }
       }
     }
-
   }
 
   private async update(name: string) {
