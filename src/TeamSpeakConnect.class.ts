@@ -31,6 +31,14 @@ export default class TeamSpeakConnect {
 
     this.teamspeak.on('ready', async () => {
       console.log('Connected to teamspeak server');
+      if(process.env.CID) {
+        try {
+          const me = await this.teamspeak.whoami();
+          await this.teamspeak.clientMove(me.clientId, process.env.CID);
+        } catch(e) {
+          console.log('Error: Unable to change channel');
+        }
+      }
       await new EventsHandler(this.teamspeak, this.config).build();
       new IntervalsHandler(this.teamspeak, this.config);
       new CommandsHandler(this.teamspeak, this.config);
